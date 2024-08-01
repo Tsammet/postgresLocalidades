@@ -1,1 +1,29 @@
+CREATE DATABASE localidades; 
+\c localidades 
 
+CREATE TABLE pais(
+id serial PRIMARY KEY,
+nombre VARCHAR(50)
+);
+
+CREATE TABLE departamento(
+id serial PRIMARY KEY,
+nombre VARCHAR(50),
+idPais INTEGER,
+FOREIGN KEY (idPais) REFERENCES pais (id)
+);
+
+CREATE TABLE municipio(
+id serial,
+nombre VARCHAR(50),
+idDepartamento INTEGER,
+UNIQUE (id, idDepartamento),
+FOREIGN KEY (idDepartamento) REFERENCES departamento (id)
+);
+
+CREATE TABLE localidades(
+idDepartamento INTEGER,
+nombreDepartamento VARCHAR(50),
+idMunicipio INTEGER,
+nombreMunicipio VARCHAR(50)
+);
